@@ -9,7 +9,7 @@ This project is licensed under the terms of the MIT license.
 ## Description
 
 The purpose here is to simplify creating and signing offline ethereum transactions into two easy functions: 
-* `offlineTransaction({<txn_details>})`
+* `createOfflineTransaction({<txn_details>})`
 * `signOfflineTransaction(txn, {<credentials>})`
 
 ## Requirements
@@ -42,14 +42,17 @@ eoff.offlineTransaction({
   value: 0
 })
 
-// Sign the offline transaction with either wallet & password, or by passing in the private key directly
+// Sign the offline transaction with either wallet & password,
+//   or by passing in the private key directly
 .then(txn => {
   let signedTransaction;
-  signedTransaction = eoff.signOfflineTransaction(txn, {wallet: '/path/to/wallet', password: '<password>'});
+  signedTransaction = eoff.signOfflineTransaction(txn, 
+    {wallet: '/path/to/wallet', password: '<password>'});
   //     -- OR using credentials directly --
-  signedTransaction = eoff.signOfflineTransaction(txnm, {privateKey: '<private_key>'});
+  signedTransaction = eoff.signOfflineTransaction(txn, 
+    {privateKey: '<private_key>'});
 
-  // send signed transaction using web3 or whatever you wish to use and wait for the receipt!
+  // send signed transaction and wait for the receipt!
   // Example using web3:
   eoff.w3.eth.sendSignedTransaction(signedTransaction)
     .on('receipt', console.log);

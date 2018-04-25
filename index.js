@@ -93,7 +93,7 @@ class EthOfflineTx {
   }
 
   // ----
-  async offlineTransaction(tx, options) {
+  async createOfflineTransaction(tx, options) {
     let _tx = await this._offlineTransaction(tx, options);
     return _tx;
   }
