@@ -1,6 +1,6 @@
 {
   "name": "eth-offline-tx",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Provides easy mechanism for creating, and signing transactions offline",
   "main": "index.js",
   "scripts": {

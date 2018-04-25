@@ -2,6 +2,8 @@
 
 This project is licensed under the terms of the MIT license.
 
+(WIP) Not guaranteed to work for all use cases. But its heading in that direction.
+
 ## Installation
 
 `npm install eth-offline-tx`
