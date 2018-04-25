@@ -46,13 +46,17 @@ eoff.offlineTransaction({
 //   or by passing in the private key directly
 .then(txn => {
   let signedTransaction;
+
   signedTransaction = eoff.signOfflineTransaction(txn, 
     {wallet: '/path/to/wallet', password: '<password>'});
+
   //     -- OR using credentials directly --
+
   signedTransaction = eoff.signOfflineTransaction(txn, 
     {privateKey: '<private_key>'});
 
   // send signed transaction and wait for the receipt!
+
   // Example using web3:
   eoff.w3.eth.sendSignedTransaction(signedTransaction)
     .on('receipt', console.log);
