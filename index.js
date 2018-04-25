@@ -45,6 +45,41 @@ SOFTWARE.
   web3.eth.sendSignedTransaction('0x'+serTx.toString('hex')).on('receipt', console.log);
 */
 
+const Web3 = require('web3');
+const Tx = require('ethereumjs-tx');
+const ajv = new require('ajv')();
+
+let validate = ajv.compile({
+  '$schema': 'http://json-schema.org/schema#',
+  'definitions': {
+    'walletOption': {
+      'type': 'object',
+      'properties': {
+        'wallet': {
+          'oneOf': [
+            { 'type': 'object' },
+            { 'type': 'string' }
+          ]
+        },
+        'password': { 'type': 'string' }
+      },
+      'required': ['wallet', 'password'],
+      'additionalProperties': true
+    },
+    'credentialsOption': {
+      'type': 'object',
+      'properties': {
+        'privateKey': { 'type': 'string' }
+      },
+      'required': ['privateKey'],
+      'additionalProperties': true
+    }
+  },
+  'oneOf': [
+    { '$ref': '#/definitions/walletOption' },
+    { '$ref': '#/definitions/credentialsOption' }
+  ]
+});
 
 // ---
 class EthOfflineTx {
@@ -55,6 +90,12 @@ class EthOfflineTx {
     }
     const w3 = new Web3(new Web3.providers.HttpProvider(provider));
     this.w3 = w3;
+  }
+
+  // ----
+  async offlineTransaction(tx, options) {
+    let _tx = await this._offlineTransaction(tx, options);
+    return _tx;
   }
 
   // ----
@@ -83,11 +124,12 @@ class EthOfflineTx {
     let privateKey = new Buffer(options.privateKey.replace('0x', ''), 'hex');
 
     tx.sign(privateKey);
-    return tx.serialize();
+    let serialized = tx.serialize();
+    return '0x'+serialized.toString('hex');
   }
 
   // ---
-  offlineTransaction(options) {
+  _offlineTransaction(options) {
     if (!this.publicKey && !options.publicKey) {
       throw new Error('An offline transaction requires the public key to get nonce.');
     }
