@@ -1,18 +1,28 @@
-## Eth-Offline-Tx
+# Eth-Offline-Tx
 
 This project is licensed under the terms of the MIT license.
 
-### Description
+## Installation
+
+`npm install eth-offline-tx`
+
+## Description
 
 The purpose here is to simplify creating and signing offline ethereum transactions into two easy functions: 
 * create `offlineTransaction({<txn_details>})`
 * sign `signOfflineTransaction(txn, {<credentials>})`
 
-### Installation
+## Requirements
 
-`npm install eth-offline-tx`
+You will need to provide the following info:
+* HttpProvider for the Ethereum client
+* Wallet & Password OR credentials (public/private key)
 
-### Usage
+Additionally if you are making a smart contract transaction:
+* ABI Definition
+* Contract Address
+
+## Usage
 
 ```
 const EthOfflineTx = require('eth-offline-tx');
@@ -22,8 +32,8 @@ const eoff = new EthOfflineTx(provider);
 
 // Create the offline transaction
 eoff.offlineTransaction({
-  publicKey:'0x2e507a9352147b9cbe4f84eea867a827e445967c',
-  to:'0x15c9ffbad7e2382903c3b2cc3addb29679498e6b', 
+  publicKey:'<public_key_redacted>',
+  to:'<contract_address_redacted>', 
   abi: abi, 
   method: 'voteForCandidate', 
   args: ['ThisGuy'],
