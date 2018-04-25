@@ -9,8 +9,8 @@ This project is licensed under the terms of the MIT license.
 ## Description
 
 The purpose here is to simplify creating and signing offline ethereum transactions into two easy functions: 
-* create `offlineTransaction({<txn_details>})`
-* sign `signOfflineTransaction(txn, {<credentials>})`
+* `offlineTransaction({<txn_details>})`
+* `signOfflineTransaction(txn, {<credentials>})`
 
 ## Requirements
 
