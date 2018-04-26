@@ -1,5 +1,7 @@
 # Eth-Offline-Tx
 
+<a href="https://travis-ci.org/abrinckm/eth-offline-tx"><img src="https://travis-ci.org/abrinckm/eth-offline-tx.svg?branch=master" alt="Build status"></a>
+
 This project is licensed under the terms of the MIT license.
 
 (WIP) Not guaranteed to work for all use cases. But its heading in that direction.
