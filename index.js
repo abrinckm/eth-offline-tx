@@ -77,6 +77,10 @@ class EthOfflineTx {
 
   // ----
   signOfflineTransaction(tx, options) {
+    if (!(tx instanceof Tx)) {
+      throw new Error('transaction must be an instance of an ethereumjs-tx transaction.');
+    }
+
     let valid = validate(options);
     if (!valid) {
       let errorMessage = validate.errors.reduce((msg, err) => { 
