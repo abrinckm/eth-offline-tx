@@ -70,10 +70,10 @@ class EthOfflineTx {
   }
 
   // ----
-  async createOfflineTransaction(tx, options) {
-    let _tx = await this._offlineTransaction(tx, options);
-    return _tx;
-  }
+  // async createOfflineTransaction(tx, options) {
+  //   let _tx = await this._offlineTransaction(tx, options);
+  //   return _tx;
+  // }
 
   // ----
   signOfflineTransaction(tx, options) {
@@ -110,7 +110,7 @@ class EthOfflineTx {
   }
 
   // ---
-  _offlineTransaction(options) {
+  createOfflineTransaction(options) {
     if (!this.from && !options.from) {
       throw new Error('An offline transaction requires the public key to get nonce.');
     }
