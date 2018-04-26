@@ -33,8 +33,8 @@ let provider = 'https://rinkeby.infura.io/<token_redacted>';
 const eoff = new EthOfflineTx(provider);
 
 // Create the offline transaction
-eoff.offlineTransaction({
-  publicKey:'<public_key_redacted>',
+eoff.createOfflineTransaction({
+  from:'<public_key_redacted>',
   to:'<contract_address_redacted>', 
   abi: abi, 
   method: 'voteForCandidate', 

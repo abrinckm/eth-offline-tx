@@ -22,29 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/*
-  let wallet = fs.readFileSync('/path/to/wallet'); 
-  let credentials = web3.eth.accounts.decrypt(wallet, '<password>');
-  web3.eth.getTransactionCount('0x2E507a9352147B9cBe4f84EEA867A827e445967c').then(_n=>nonce=_n);
-  let data = c.methods.voteForCandidate(web3.utils.toHex('Me')).encodeABI();
-
-  let rawTx = {
-    ... nonce: nonce,
-    ... gasPrice: web3.utils.toHex(web3.utils.toWei('55', 'gwei')),
-    ... gas: 400000,
-    ... to: '0x15c9ffbad7e2382903c3b2cc3addb29679498e6b',
-    ... value: 0,
-    ... data: data
-  }
-
-  let ethtx = require('ethereumjs-tx');
-  let privKey = new Buffer('<privkey>', 'hex');
-  let tx = new Tx(rawTx);
-  tx.sign(privKey);
-  let serTx = tx.serialize();
-  web3.eth.sendSignedTransaction('0x'+serTx.toString('hex')).on('receipt', console.log);
-*/
-
 const Web3 = require('web3');
 const Tx = require('ethereumjs-tx');
 const ajv = new require('ajv')();
@@ -130,11 +107,12 @@ class EthOfflineTx {
 
   // ---
   _offlineTransaction(options) {
-    if (!this.publicKey && !options.publicKey) {
+    if (!this.from && !options.from) {
       throw new Error('An offline transaction requires the public key to get nonce.');
     }
 
-    let { abi, to, gas, gasPrice, value, method, args, publicKey } = options;
+    let { abi, to, gas, gasPrice, value, 
+          method, args, from, gasLimit } = options;
 
     let contract, w3 = this.w3;
     if (method||abi) {
@@ -145,18 +123,26 @@ class EthOfflineTx {
     }
 
     let rawTx = {
+      from: from,
       to: to,
       gas: gas,
+      gasLimit: gasLimit,
       gasPrice: w3.utils.toHex(w3.utils.toWei(gasPrice, 'gwei')),
       value: value
     };
 
-    return this.w3.eth.getTransactionCount(publicKey)
+    return this.w3.eth.getTransactionCount(from)
       .then(nonce => {
         rawTx.nonce = nonce;
         if (contract) {
           rawTx.data = contract.methods[method](...args.map(arg=>w3.utils.toHex(arg))).encodeABI();
         }
+        rawTx = Object.keys(rawTx).reduce((raw, prop) => { 
+          if (rawTx[prop] !== undefined && rawTx[prop] !== null) {
+            raw[prop]=rawTx[prop];
+          } 
+          return raw; 
+        }, {});
         return new Tx(rawTx);
       })
     ;
