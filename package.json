@@ -1,10 +1,10 @@
 {
   "name": "eth-offline-tx",
-  "version": "1.0.8",
+  "version": "1.0.a",
   "description": "Provides easy mechanism for creating, and signing transactions offline",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "./node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
