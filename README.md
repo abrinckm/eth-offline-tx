@@ -1,4 +1,4 @@
-# Eth-Offline-Tx <a href="https://www.npmjs.com/package/eth-offline-tx"><img src="">
+# Eth-Offline-Tx 
 
 <a href="https://travis-ci.org/abrinckm/eth-offline-tx"><img src="https://travis-ci.org/abrinckm/eth-offline-tx.svg?branch=master" alt="Build status"></a>
 [![Coverage Status](https://coveralls.io/repos/github/abrinckm/eth-offline-tx/badge.svg?branch=master)](https://coveralls.io/github/abrinckm/eth-offline-tx?branch=master)
