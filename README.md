@@ -1,7 +1,10 @@
-# Eth-Offline-Tx
+# Eth-Offline-Tx <a href="https://www.npmjs.com/package/eth-offline-tx"><img src="">
 
 <a href="https://travis-ci.org/abrinckm/eth-offline-tx"><img src="https://travis-ci.org/abrinckm/eth-offline-tx.svg?branch=master" alt="Build status"></a>
 [![Coverage Status](https://coveralls.io/repos/github/abrinckm/eth-offline-tx/badge.svg?branch=master)](https://coveralls.io/github/abrinckm/eth-offline-tx?branch=master)
+[![npm version](https://badge.fury.io/js/eth-offline-tx.svg)](https://badge.fury.io/js/eth-offline-tx)
+[![node](https://img.shields.io/badge/node-%3E=8.9.1-brightgreen.svg)](https://nodejs.org/dist/latest-v8.x/docs/api/)
+
 
 This project is licensed under the terms of the MIT license.
 
